@@ -24,6 +24,5 @@ jobs:
       - name: Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@v4
         with:
-          directory: .
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           fail-if-incomplete: false
