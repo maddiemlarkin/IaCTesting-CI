@@ -1,0 +1,29 @@
+﻿name: Codacy Analysis (CI)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  codacy-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install linters
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit flake8
+
+      - name: Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@v4
+        with:
+          directory: .
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          fail-if-incomplete: false
